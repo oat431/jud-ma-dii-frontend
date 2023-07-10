@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/Home.vue";
+import Home from "../pages/Home.vue";
+import Login from "../pages/auth/Login.vue";
 import Nprogress from "nprogress";
 
 const routes = [
@@ -8,6 +9,11 @@ const routes = [
         name: "Home",
         component: Home,
     },
+    {
+        path: "/login",
+        name: "Login",
+        component: Login
+    }
 ];
 
 const router = createRouter({
