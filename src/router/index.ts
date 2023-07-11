@@ -6,6 +6,8 @@ import Admin from "../pages/admin/AdminPage.vue";
 import Requester from "../pages/requester/RequesterPage.vue";
 import Approver from "../pages/approver/ApproverPage.vue";
 import Purchaser from "../pages/purchaser/PurchaserPage.vue";
+import Register from "../pages/auth/Register.vue";
+import AdminAssign from "../pages/admin/AdminAssignPage.vue";
 
 const routes = [
     {
@@ -19,9 +21,19 @@ const routes = [
         component: Login
     },
     {
+        path: "/register",
+        name: "Register",
+        component: Register
+    },
+    {
         path: "/admin",
         name: "Admin",
         component: Admin
+    },
+    {
+        path: "/admin/:uuid",
+        name: "AdminAssign",
+        component: AdminAssign
     },
     {
         path: "/requester",

@@ -63,7 +63,7 @@ onMounted(async() => {
         <div v-else class="flex-none">
             <ul class="menu menu-horizontal px-1">
                 <li><router-link to="/login">Login</router-link></li>
-                <li><a>Register</a></li>
+                <li><router-link to="/register">Register</router-link></li>
             </ul>
         </div>
     </div>
