@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import DefaultLayout from '@/layout/DefaultLayout.vue';
-import HelloWorld from '@/components/HelloWorld.vue';
+import DefaultLayout from '../layout/DefaultLayout.vue';
+import HelloWorld from '../components/HelloWorld.vue';
 </script>
 
 <template>
     <DefaultLayout>
-        <HelloWorld />
+        <HelloWorld msg="hi"/>
     </DefaultLayout>
 </template>

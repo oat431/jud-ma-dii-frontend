@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/Home.vue";
+import Home from "../pages/Home.vue";
+import Login from "../pages/auth/Login.vue";
 import Nprogress from "nprogress";
+import Admin from "../pages/admin/AdminPage.vue";
+import Requester from "../pages/requester/RequesterPage.vue";
+import Approver from "../pages/approver/ApproverPage.vue";
+import Purchaser from "../pages/purchaser/PurchaserPage.vue";
+import Register from "../pages/auth/Register.vue";
+import AdminAssign from "../pages/admin/AdminAssignPage.vue";
 
 const routes = [
     {
@@ -8,6 +15,41 @@ const routes = [
         name: "Home",
         component: Home,
     },
+    {
+        path: "/login",
+        name: "Login",
+        component: Login
+    },
+    {
+        path: "/register",
+        name: "Register",
+        component: Register
+    },
+    {
+        path: "/admin",
+        name: "Admin",
+        component: Admin
+    },
+    {
+        path: "/admin/:uuid",
+        name: "AdminAssign",
+        component: AdminAssign
+    },
+    {
+        path: "/requester",
+        name: "Requester",
+        component: Requester
+    },
+    {
+        path: "/approver",
+        name: "Approver",
+        component: Approver
+    },
+    {
+        path: "/purchaser",
+        name: "Purchaser",
+        component: Purchaser
+    }
 ];
 
 const router = createRouter({
