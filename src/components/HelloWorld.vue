@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-
-defineProps<{ msg: string }>();
-const msg = ref(import.meta.env.TODOLIST_V3_API);
-
 const count = ref(0);
+defineProps({
+  msg: String,
+});
 </script>
 
 <template>

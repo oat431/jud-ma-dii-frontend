@@ -6,17 +6,19 @@ import nProgress from 'nprogress';
 import * as yup from "yup";
 import { useRouter } from "vue-router";
 
+const router = useRouter();
 const schma = yup.object({
     username: yup.string().required(),
     password: yup.string().required(),
 });
 const handleLogin = async (value: { [x: string]: string }) => {
     nProgress.start();
-    const res = await AuthService.login(value.username, value.password)
-    localStorage.setItem('token', res.data.token);
-    useRouter().push('/');
+    const response = await AuthService.login(value.username, value.password)
+    localStorage.setItem('token', response.data.token);
     nProgress.done();
+    router.go(0)
 }
+
 </script>
 <template>
     <DefaultLayout>

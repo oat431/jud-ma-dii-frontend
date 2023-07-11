@@ -3,5 +3,9 @@ import { ref } from 'vue'
 
 export const useAuthStore = defineStore('auth',() => {
     const data = ref();
-    return { data }
+
+    function $reset() {
+        data.value = null;
+    }
+    return { data, $reset }
 })
