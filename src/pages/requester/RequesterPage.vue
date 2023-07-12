@@ -3,6 +3,7 @@ import DefaultLayout from '../../layout/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import RequesterService from '../../services/RequesterService';
 import RequesterDetailsModal from './RequesterDetailsModal.vue';
+import RequesterCreateModal from './RequesterCreateModal.vue';
 import { useRequesterStore } from './RequesterState';
 
 const data = ref();
@@ -18,6 +19,10 @@ async function getRequesterDetails(id:number) {
     reqDetails.value = response.data;
     requester.$toggleDetails();
 }
+
+function openCreateRequest() {
+    requester.$toggleCreate();
+}
 </script>
 <template>
     <DefaultLayout>
@@ -25,7 +30,7 @@ async function getRequesterDetails(id:number) {
             <h1 class="text-3xl m-3">
                 Order
             </h1>
-            <button class="btn btn-ghost">create new order</button>
+            <button @click="openCreateRequest()" class="btn btn-ghost">create new order</button>
         </div>
     </DefaultLayout>
     <DefaultLayout>
@@ -83,4 +88,5 @@ async function getRequesterDetails(id:number) {
         </div>
     </DefaultLayout>
     <RequesterDetailsModal v-if="data" :details="reqDetails" />
+    <RequesterCreateModal />
 </template>

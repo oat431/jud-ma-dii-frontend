@@ -3,10 +3,10 @@ import { ItemRequest } from "../model/request/ItemRequest";
 
 export default {
     createItem(item: ItemRequest) {
-        return apiClientH.post(`/item`, item);
+        return apiClientH.post(`/item/`, item);
     },
     getItems() {
-        return apiClientH.get(`/item`);
+        return apiClientH.get(`/item/`);
     },
     getItem(id: number) {
         return apiClientH.get(`/item/${id}`);
