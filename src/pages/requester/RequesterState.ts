@@ -5,6 +5,7 @@ export const useRequesterStore = defineStore('requesterStore',() => {
     const data = ref();
     const details = ref(false);
     const create = ref(false);
+    const itemCreate = ref(false);
 
     function $toggleDetails() {
         details.value = !details.value;
@@ -14,5 +15,17 @@ export const useRequesterStore = defineStore('requesterStore',() => {
         create.value = !create.value;
     }
 
-    return { data , details, $toggleDetails, create, $toggleCreate }
+    function $toggleItemCreate() {
+        itemCreate.value = !itemCreate.value;
+    }
+
+    return {
+        data,
+        details,
+        $toggleDetails,
+        create,
+        $toggleCreate,
+        itemCreate,
+        $toggleItemCreate
+    }
 })
