@@ -2,7 +2,7 @@
 import DefaultLayout from '../../layout/DefaultLayout.vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-import { RegisterForm } from '../../model/RegisterForm';
+import { RegisterForm } from '../../model/request/RegisterForm';
 import AuthService from '../../services/AuthService';
 import { useRouter } from 'vue-router';
 
@@ -152,4 +152,4 @@ const schema = yup.object({
             </Form>
         </section>
     </DefaultLayout>
-</template>
+</template>../../model/request/RegisterForm

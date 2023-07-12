@@ -1,6 +1,6 @@
 import apiClient from "./ApiClient";
 import apiClientH from "./ApiClientH";
-import { RegisterForm } from "../model/RegisterForm";
+import { RegisterForm } from "../model/request/RegisterForm";
 
 export default {
     login(username: string, password: string) {
