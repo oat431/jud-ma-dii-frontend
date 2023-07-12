@@ -2,25 +2,34 @@
 import DefaultLayout from '../../layout/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import RequesterService from '../../services/RequesterService';
-// import { useRouter } from 'vue-router';
+import RequesterDetailsModal from './RequesterDetailsModal.vue';
+import { useRequesterStore } from './RequesterState';
 
-// const router = useRouter();
 const data = ref();
-
+const reqDetails = ref();
+const requester = useRequesterStore();
 onMounted(async () => {
     const response = await RequesterService.getRequests(1, 10);
     data.value = response.data;
 });
-// const name = (msg: string) => msg.substring(5)
 
-// function seeDetail(uuid:string) {
-    // router.push({name: 'AdminAssign', params: {uuid: uuid}});
-// }
+async function getRequesterDetails(id:number) {
+    const response = await RequesterService.getRequest(id);
+    reqDetails.value = response.data;
+    requester.$toggleDetails();
+}
 </script>
 <template>
     <DefaultLayout>
+        <div class="overflow-x-auto">
+            <h1 class="text-3xl m-3">
+                Order
+            </h1>
+            <button class="btn btn-ghost">create new order</button>
+        </div>
+    </DefaultLayout>
+    <DefaultLayout>
         <div v-if="data" class="overflow-x-auto">
-
             <table class="table w-full">
                 <thead>
                     <tr>
@@ -57,7 +66,7 @@ onMounted(async () => {
                         </td>
                         <td>{{ item.total }}</td>
                         <th>
-                            <button class="btn btn-ghost btn-xs">Details</button>
+                            <button @click="getRequesterDetails(item.id)" class="btn btn-ghost btn-xs">Details</button>
                         </th>
                     </tr>
                 </tbody>
@@ -73,4 +82,5 @@ onMounted(async () => {
             </table>
         </div>
     </DefaultLayout>
+    <RequesterDetailsModal v-if="data" :details="reqDetails" />
 </template>

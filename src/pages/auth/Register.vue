@@ -152,4 +152,4 @@ const schema = yup.object({
             </Form>
         </section>
     </DefaultLayout>
-</template>
+</template>../../model/request/RegisterForm
