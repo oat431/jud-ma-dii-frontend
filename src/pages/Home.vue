@@ -5,6 +5,6 @@ import HelloWorld from '../components/HelloWorld.vue';
 
 <template>
     <DefaultLayout>
-        <HelloWorld msg="hi"/>
+        <HelloWorld msg="hi this is home page"/>
     </DefaultLayout>
 </template>

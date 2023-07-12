@@ -8,6 +8,7 @@ import Approver from "../pages/approver/ApproverPage.vue";
 import Purchaser from "../pages/purchaser/PurchaserPage.vue";
 import Register from "../pages/auth/Register.vue";
 import AdminAssign from "../pages/admin/AdminAssignPage.vue";
+import Profile from "../pages/auth/Profile.vue";
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: "/register",
         name: "Register",
         component: Register
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: Profile
     },
     {
         path: "/admin",

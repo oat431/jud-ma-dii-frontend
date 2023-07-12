@@ -17,5 +17,8 @@ export default {
     },
     logout() {
         localStorage.removeItem('token');
+    },
+    getAccountDetails() {
+        return apiClientH.get('/auth/details');
     }
 }
