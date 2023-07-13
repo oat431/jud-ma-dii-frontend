@@ -1,29 +1,23 @@
 <script setup lang="ts">
-import { ref } from "vue";
-const count = ref(0);
-defineProps({
-  msg: String,
-});
+import { useRouter } from 'vue-router';
+const router = useRouter();
+function goToLogin() {
+    router.push('/login');
+}
 </script>
-
 <template>
-  <div class="card mt-3">
-    <button class="btn btn-primary" type="button" @click="count++">
-      count is {{ count }}
-    </button>
-    <div class="mockup-code mt-3">
-      <pre data-prefix=">" class="text-success">
-        <code>Edit components/HelloWorld.vue</code> to test HMR
-      </pre>
-      <pre data-prefix=">" class="text-warning">
-        <code>Check out <a class="link link-warning" href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite starter</code>
-      </pre>
-      <pre data-prefix=">" class="text-secondary">
-        <code>Intall <a class="link link-secondary" href="https://github.com/vuejs/language-tools" target="_blank">Volar</a> in your IDE for a better DX</code>
-      </pre>
-      <pre data-prefix=">" class="text-error">
-        <code>{{ msg }}</code>
-      </pre>
+  <div class="hero min-h-screen"
+    style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
+    <div class="hero-overlay bg-opacity-60"></div>
+    <div class="hero-content text-center text-neutral-content">
+      <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
+        <p class="mb-5">
+          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi.
+          In deleniti eaque aut repudiandae et a id nisi.
+        </p>
+        <button @click="goToLogin()" class="btn btn-primary">Get Started</button>
+      </div>
     </div>
   </div>
 </template>

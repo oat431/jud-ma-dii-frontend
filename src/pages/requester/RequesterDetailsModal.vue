@@ -157,8 +157,8 @@ async function updateBill() {
             </p>
             <p v-if="props.details.status === 'DELIVERED'" class="py-4 text-xl">
                 <span class="font-bold">location of package:</span>
-                {{ props.details.location.address }}, {{ props.details.location.city }}
-                {{ props.details.location.zip }}
+                {{ props.details.location.address }}, {{ props.details.location.state }},
+                {{ props.details.location.city }} {{ props.details.location.zip }}
             </p>
             <div class="modal-action">
                 <button @click="close()" class="btn btn-sm">close</button>

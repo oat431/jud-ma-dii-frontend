@@ -1,6 +1,6 @@
 # Jud Sue Jud Jang Website
 
-- [ ] Auth Page
-- [ ] Requester Page
-- [ ] Approver Page
-- [ ] Purchaster Page
+- [x] Auth Page
+- [x] Requester Page
+- [x] Approver Page
+- [x] Purchaster Page
