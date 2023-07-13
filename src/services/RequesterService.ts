@@ -6,8 +6,8 @@ export default {
     },
     getRequest(id: number) {
         return apiClientH.get(`/requester/${id}`);
+    },
+    createRequest(request: any) {
+        return apiClientH.post(`/requester/`, request);
     }
-    // createRequest(request: any) {
-
-    // }
 }

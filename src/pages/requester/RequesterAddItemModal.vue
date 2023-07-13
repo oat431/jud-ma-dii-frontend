@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { useRequesterStore } from './RequesterState';
-// import ItemService from '../../services/ItemService';
-// import RequesterService from '../../services/RequesterService';
-// import { ref } from 'vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import ItemService from '../../services/ItemService';
@@ -19,6 +16,7 @@ async function createItem(item: { [x: string]: any }) {
         price: item.price
     };
     await ItemService.createItem(request);
+    requester.$refreshItemList();
     requester.$toggleItemCreate();
 }
 const schema = yup.object({

@@ -1,20 +1,41 @@
 <script setup lang="ts">
 import { useRequesterStore } from './RequesterState';
-import ItemService from '../../services/ItemService';
+import { useRouter } from 'vue-router';
 import RequesterAddItemModal from './RequesterAddItemModal.vue';
-// import RequesterService from '../../services/RequesterService';
+import RequesterService from '../../services/RequesterService';
 import { onMounted, ref } from 'vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
+const router = useRouter();
 const requester = useRequesterStore();
-const itemLists = ref();
+// const itemLists = ref();
 const itemOrder = ref<any[]>([]);
+const itemListRequest = ref<any[]>([]);
+const billItemRequest = ref<any[]>([]);
+const billRequest = ref<any>({
+    name: String,
+    description: String,
+    items: billItemRequest.value
+});
 const close = () => {
     requester.$toggleCreate();
 };
-function createOrder() {
-    console.log('create order');
+async function createOrder(values: { [x: string]: any }) {
+    let billItemReq = {
+        itemId: String ,
+        amount: Number
+    }
+    for(let i = 0; i < itemOrder.value.length; i++){
+        billItemReq.itemId = itemOrder.value[i].id;
+        billItemReq.amount = itemListRequest.value[i];
+        billItemRequest.value.push(billItemReq);
+    }
+    billRequest.value.name = values.name;
+    billRequest.value.description = values.description;
+    billRequest.value.billItems = billItemRequest.value;
+    await RequesterService.createRequest(billRequest.value);
+    router.go(0);
 }
 const schema = yup.object({
     name: yup
@@ -26,18 +47,17 @@ const schema = yup.object({
 });
 
 onMounted(async () => {
-    const response = await ItemService.getItems();
-    itemLists.value = response.data;
+    requester.$refreshItemList();
 });
 
 const itemInOrder = ref();
 function addItem(): void {
-    if(itemInOrder.value === 'addmore') {
+    if (itemInOrder.value === 'addmore') {
         requester.$toggleItemCreate();
         return;
     }
-    for(let item of itemOrder.value) {
-        if(item === itemInOrder.value) {
+    for (let item of itemOrder.value) {
+        if (item === itemInOrder.value) {
             alert('item already added')
             return;
         }
@@ -53,7 +73,7 @@ function addItem(): void {
                 <h2 class="text-lg font-semibold text-gray-700 capitalize">
                     Create New Order
                 </h2>
-                <Form @submit="createOrder()" :validation-schema="schema">
+                <Form @submit="createOrder" :validation-schema="schema">
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-1">
                         <div>
                             <label class="text-gray-700" for="name">title</label>
@@ -68,6 +88,23 @@ function addItem(): void {
                             <ErrorMessage name="description" class="text-red-500" />
                         </div>
                     </div>
+                    <h2 class="text-lg font-semibold text-gray-700 mt-6 capitalize">
+                        Item list
+                    </h2>
+                    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-1">
+
+                        <div v-for="(order,index) in itemOrder">
+                            <div>
+                                <span>{{ order.name }}</span>
+                            </div>
+                            <div>
+                                <input
+                                    v-model="itemListRequest[index]"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring"
+                                    type="text" placeholder="amount" />
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex justify-end mt-6">
                         <button class="btn btn-primary btn-sm">
                             create order
@@ -78,21 +115,15 @@ function addItem(): void {
                     <label class="label">
                         <span class="label-text text-xl">select item</span>
                     </label>
-                    <select 
-                        v-model="itemInOrder"
-                        @change="addItem()"
-                        class="select select-bordered w-full max-w-xs m-3"
-                        name="item"
-                        placeholder="item"
-                    >
+                    <select v-model="itemInOrder" @change="addItem()" class="select select-bordered text-lg w-full max-w-xs m-3"
+                        name="item" placeholder="item">
                         <option disabled selected>Select item</option>
-                        <option v-for="item in itemLists" :value="item" @click="addItem()">
+                        <option v-for="item in requester.items" :value="item" @click="addItem()">
                             {{ item.name }}
                         </option>
                         <option value="addmore">add more item</option>
                     </select>
                 </div>
-                <div>{{ itemOrder }}</div>
             </section>
             <div class="modal-action">
                 <button @click="close()" class="btn btn-sm">close</button>
