@@ -22,11 +22,11 @@ const close = () => {
     requester.$toggleCreate();
 };
 async function createOrder(values: { [x: string]: any }) {
-    let billItemReq = {
-        itemId: String ,
-        amount: Number
-    }
-    for(let i = 0; i < itemOrder.value.length; i++){
+    for (let i = 0; i < itemOrder.value.length; i++) {
+        let billItemReq = {
+            itemId: String,
+            amount: Number
+        }
         billItemReq.itemId = itemOrder.value[i].id;
         billItemReq.amount = itemListRequest.value[i];
         billItemRequest.value.push(billItemReq);
@@ -93,13 +93,12 @@ function addItem(): void {
                     </h2>
                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-1">
 
-                        <div v-for="(order,index) in itemOrder">
+                        <div v-for="(order, index) in itemOrder">
                             <div>
                                 <span>{{ order.name }}</span>
                             </div>
                             <div>
-                                <input
-                                    v-model="itemListRequest[index]"
+                                <input v-model="itemListRequest[index]"
                                     class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring"
                                     type="text" placeholder="amount" />
                             </div>
@@ -115,8 +114,8 @@ function addItem(): void {
                     <label class="label">
                         <span class="label-text text-xl">select item</span>
                     </label>
-                    <select v-model="itemInOrder" @change="addItem()" class="select select-bordered text-lg w-full max-w-xs m-3"
-                        name="item" placeholder="item">
+                    <select v-model="itemInOrder" @change="addItem()"
+                        class="select select-bordered text-lg w-full max-w-xs m-3" name="item" placeholder="item">
                         <option disabled selected>Select item</option>
                         <option v-for="item in requester.items" :value="item" @click="addItem()">
                             {{ item.name }}

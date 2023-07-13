@@ -151,7 +151,7 @@ async function updateBill() {
                 <span class="font-bold">created by:</span>
                 {{ props.details.createdBy }}
             </p>
-            <p v-if="props.details.status === 'REJECT'" class="py-4 text-xl">
+            <p v-if="props.details.status === 'REJECTED'" class="py-4 text-xl">
                 <span class="font-bold">reject because:</span>
                 {{ props.details.reason }}
             </p>
