@@ -9,5 +9,11 @@ export default {
     },
     createRequest(request: any) {
         return apiClientH.post(`/requester/`, request);
+    },
+    updateRequest(id:number,request: any) {
+        return apiClientH.put(`/requester/${id}`, request);
+    },
+    deleteRequest(id: number) {
+        return apiClientH.delete(`/requester/${id}`);
     }
 }
