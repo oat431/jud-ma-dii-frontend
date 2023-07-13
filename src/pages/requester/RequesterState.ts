@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import ItemService from '../../services/ItemService';
 
 export const useRequesterStore = defineStore('requesterStore',() => {
     const data = ref();
     const details = ref(false);
     const create = ref(false);
     const itemCreate = ref(false);
+    const items = ref<any[]>([]);
 
     function $toggleDetails() {
         details.value = !details.value;
@@ -19,6 +21,11 @@ export const useRequesterStore = defineStore('requesterStore',() => {
         itemCreate.value = !itemCreate.value;
     }
 
+    async function $refreshItemList() {
+        const response = await ItemService.getItems();
+        items.value = response.data;
+    }
+
     return {
         data,
         details,
@@ -26,6 +33,8 @@ export const useRequesterStore = defineStore('requesterStore',() => {
         create,
         $toggleCreate,
         itemCreate,
-        $toggleItemCreate
+        $toggleItemCreate,
+        items,
+        $refreshItemList
     }
 })
