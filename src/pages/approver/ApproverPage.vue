@@ -2,19 +2,29 @@
 import DefaultLayout from '../../layout/DefaultLayout.vue';
 import { onMounted, ref } from 'vue';
 import ApproverService from '../../services/ApproverService';
-import { useRouter } from 'vue-router';
+import ApproverApprovePage from './ApproverApprovePage.vue';
+import { useApproverStore } from './ApproverState';
 
-const router = useRouter();
+const approver = useApproverStore();
 const data = ref();
+const details = ref();
 
 onMounted(async () => {
     const response = await ApproverService.getRequests(1, 10);
     data.value = response.data;
 });
-async function approve(id: string) {
-    await ApproverService.ApproverAction(id,true);
-    router.go(0);
+async function seeBillDetails(id: number) {
+    const response = await ApproverService.getRequest(id);
+    details.value = response.data;
+    approver.$toggleDetails();
 }
+
+const textOverflow = (text: string) => {
+    if (text.length > 20) {
+        return text.substring(0, 20) + '...';
+    }
+    return text;
+};
 </script>
 <template>
     <DefaultLayout>
@@ -46,19 +56,20 @@ async function approve(id: string) {
                             <div class="flex items-center space-x-3">
                                 <div>
                                     <div class="font-bold">{{ item.name }}</div>
-                                    <div class="text-sm opacity-50">{{ item.username }}</div>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            {{ item.description }}
+                            <span class="truncate ...">
+                                {{ textOverflow(item.description) }}
+                            </span> 
                             <br />
                             <span class="badge badge-ghost badge-sm">{{ item.status }}</span>
                         </td>
                         <td>{{ item.total }}</td>
                         <td>{{ item.createdBy }}</td>
                         <th>
-                            <button @click="approve(item.id)" class="btn btn-ghost btn-xs">submit</button>
+                            <button @click="seeBillDetails(item.id)" class="btn btn-ghost btn-xs">details</button>
                         </th>
                     </tr>
                 </tbody>
@@ -75,4 +86,5 @@ async function approve(id: string) {
             </table>
         </div>
     </DefaultLayout>
+    <ApproverApprovePage v-if="data" :details="details"/>
 </template>

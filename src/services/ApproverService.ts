@@ -4,7 +4,10 @@ export default {
     getRequests(page: number, size: number) {
         return apiClientH.get(`/approver/?_page=${page}&_size=${size}`);
     },
-    ApproverAction(id: string, action: boolean) {
-        return apiClientH.patch(`/approver/${id}?approved=${action}`);
+    getRequest(id: number) {
+        return apiClientH.get(`/approver/${id}`);
+    },
+    ApproverAction(id: string, action: boolean, reason:any) {
+        return apiClientH.patch(`/approver/${id}?approved=${action}`, reason);
     }
 }

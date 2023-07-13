@@ -23,6 +23,13 @@ async function getRequesterDetails(id:number) {
 function openCreateRequest() {
     requester.$toggleCreate();
 }
+
+const textOverflow = (text: string) => {
+    if (text.length > 20) {
+        return text.substring(0, 20) + '...';
+    }
+    return text;
+};
 </script>
 <template>
     <DefaultLayout>
@@ -65,7 +72,7 @@ function openCreateRequest() {
                             </div>
                         </td>
                         <td>
-                            {{ item.description }}
+                            {{ textOverflow(item.description) }}
                             <br />
                             <span class="badge badge-ghost badge-sm">{{ item.status }}</span>
                         </td>
