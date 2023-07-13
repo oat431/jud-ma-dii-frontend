@@ -33,11 +33,11 @@ const textOverflow = (text: string) => {
 </script>
 <template>
     <DefaultLayout>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto flex">
             <h1 class="text-3xl m-3">
                 Order
             </h1>
-            <button @click="openCreateRequest()" class="btn btn-ghost">create new order</button>
+            <button @click="openCreateRequest()" class="btn btn-sm m-4">create order</button>
         </div>
     </DefaultLayout>
     <DefaultLayout>
