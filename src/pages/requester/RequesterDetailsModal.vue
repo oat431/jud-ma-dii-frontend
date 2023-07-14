@@ -160,16 +160,16 @@ async function updateBill() {
                 {{ props.details.location.address }}, {{ props.details.location.state }},
                 {{ props.details.location.city }} {{ props.details.location.zip }}
             </p>
-            <div class="modal-action">
-                <button @click="close()" class="btn btn-sm">close</button>
-            </div>
             <div v-if="!updateMode">
-                <button @click="toogleUpdateMode()" class="btn btn-sm m-3">update</button>
+                <button @click="toogleUpdateMode()" class="btn btn-sm btn-warning m-3">update</button>
                 <button @click="deleteRequest()" class="btn btn-sm m-3 btn-error">delete</button>
             </div>
             <div v-if="updateMode">
-                <button @click="toogleUpdateMode()" class="btn btn-sm m-3">cancel</button>
-                <button @click="updateBill()" class="btn btn-sm m-3">update</button>
+                <button @click="updateBill()" class="btn btn-sm btn-warning m-3">submit</button>
+                <button @click="toogleUpdateMode()" class="btn btn-sm btn-outline m-3">cancel</button>
+            </div>
+            <div class="modal-action">
+                <button @click="close()" class="btn btn-sm btn-outline">close</button>
             </div>
         </div>
     </div>

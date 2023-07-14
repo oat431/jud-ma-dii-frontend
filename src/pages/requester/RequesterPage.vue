@@ -37,7 +37,7 @@ const textOverflow = (text: string) => {
             <h1 class="text-3xl m-3">
                 Order
             </h1>
-            <button @click="openCreateRequest()" class="btn btn-sm m-4">create order</button>
+            <button @click="openCreateRequest()" class="btn btn-sm btn-ghost underline m-4">create order</button>
         </div>
     </DefaultLayout>
     <DefaultLayout>
